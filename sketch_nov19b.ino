@@ -5,7 +5,9 @@
 
 TMRpcm tmrpcm;
 
+
 void setup() {
+pinMode(7, INPUT_PULLUP);
 tmrpcm.speakerPin=9;
 Serial.begin(9600);
 if(!SD.begin(SD_ChipSelectPin))
@@ -14,11 +16,27 @@ if(!SD.begin(SD_ChipSelectPin))
   return;
 }
 tmrpcm.setVolume(5);
-tmrpcm.play("start.wav");
+
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+ int bState = digitalRead(7);
+
+    Serial.println(bState);
+    if (bState == HIGH) {
+
+        Serial.println("pin high");
+            tmrpcm.play("start.wav");
+
+
+  } else {
+
+      Serial.println("pin low");
+  
+
+
+
+  }
 
 }
